@@ -1,4 +1,4 @@
-# Estudio de Yoga — MVP
+# Estudio de Yoga — [MVP](https://marucepeda.github.io/yoga-studio-prototype/)
 
 Gestión digital de clases, paquetes y reservas para un estudio de yoga.
 
