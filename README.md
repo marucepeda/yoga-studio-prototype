@@ -1,136 +1,58 @@
-# Estudio de Yoga I — [MVP](https://marucepeda.github.io/yoga-studio-prototype/)
+# Estudio de Yoga I — Visual Prototype
 
-Gestión digital de clases, paquetes y reservas para un estudio de yoga.
+[Ver MVP](https://marucepeda.github.io/yoga-studio-prototype/)
 
-Proyecto I de Fundamentos de Product Engineering con IA · Código Facilito
+Primera etapa del proyecto Yoga Studio, desarrollado para **Fundamentos de Product Engineering con IA · Código Facilito**.
 
----
+## ¿Qué es este proyecto?
 
-## ¿Qué es esto?
+Un prototipo visual de una aplicación web para un pequeño estudio de yoga.
 
-Aplicación web para la gestión de un pequeño estudio de yoga. Reemplaza el control manual de paquetes de clases (tarjetas físicas) y la gestión informal de reservas por un sistema digital sencillo, confiable y accesible desde el celular.
+La propuesta parte de una situación concreta: Andrea, administradora del estudio, gestiona clases y paquetes mediante tarjetas físicas y procesos manuales. Esto puede generar desacuerdos sobre los créditos disponibles, dificultades para controlar los cupos y complicaciones al comunicar cancelaciones.
 
-**Problema que resuelve:** Andrea, administradora del estudio, perdía tiempo y generaba fricciones con alumnas por desacuerdos sobre saldos de clases, clases que se llenaban sin aviso, y la dificultad de comunicar cancelaciones a todas las inscriptas.
+El objetivo de esta primera etapa fue explorar cómo podría resolverse ese problema mediante una interfaz digital.
 
----
+## ¿Qué incluye?
 
-## Funcionalidades del MVP
+El prototipo presenta distintas pantallas y flujos conceptuales:
 
-- Gestión de alumnas y sus datos
-- Paquetes de clases con historial de movimientos trazable
-- Agenda semanal de clases con capacidad configurable
-- Reservas con verificación de cupo y saldo disponible
-- Lista de espera automática cuando una clase se completa
-- Comunicación de cancelaciones vía WhatsApp (mensaje prellenado, sin API externa)
-- Control de asistencia por parte de las instructoras
-- Tres roles diferenciados: administradora, instructoras y alumnas
+- Panel de administración.
+- Agenda semanal de clases.
+- Vista de alumnas y paquetes de clases.
+- Historial de movimientos.
+- Vistas relacionadas con reservas y cancelaciones.
+- Referencias visuales a la gestión de asistencia y comunicación.
 
----
+**Importante:** estas pantallas representan una propuesta de producto. Las operaciones de negocio no están implementadas funcionalmente.
 
-## Stack tecnológico
+## Tecnología
 
-| Capa | Tecnología |
-| --- | --- |
-| Framework | Next.js 14 (App Router) |
-| Base de datos | PostgreSQL (Supabase) |
-| ORM | Prisma |
-| Autenticación | Supabase Auth + RLS |
-| Deploy | Vercel |
+- HTML
+- CSS
+- JavaScript
+- Tabler Icons mediante CDN
 
----
+La navegación entre pantallas se realiza con JavaScript. No cuenta con backend, base de datos, autenticación ni persistencia de información.
 
-## Estructura del proyecto
+## Alcance y limitaciones
 
-```
-/
-├── app/                  # Rutas y páginas (Next.js App Router)
-│   ├── (admin)/          # Rutas de administración
-│   ├── (instructor)/     # Rutas de instructoras
-│   └── (alumna)/         # Rutas de alumnas
-├── components/           # Componentes reutilizables
-├── lib/                  # Lógica de negocio y utilidades
-├── prisma/
-│   └── schema.prisma     # Modelo de datos
-└── .env.example          # Variables de entorno requeridas
-```
+Esta entrega corresponde a una primera exploración de interfaz y experiencia de usuario.
 
----
+No incluye:
+- Gestión real de reservas o lista de espera.
+- Validación de cupos o créditos.
+- Registro persistente de asistencia.
+- Gestión de usuarios y permisos.
+- Integraciones con servicios externos.
 
-## Cómo correrlo localmente
+Las funcionalidades anteriores forman parte de la visión del producto, no de las capacidades implementadas en esta versión.
 
-### Requisitos previos
+## Evolución del proyecto
 
-- Node.js 18+
-- Cuenta en [Supabase](https://supabase.com) (plan gratuito alcanza)
+Esta primera entrega permitió explorar el problema y visualizar una posible solución.
 
-### Pasos
+En la segunda etapa, el proyecto avanzó hacia un enfoque de **Specification-Driven Development (SDD)**: contexto persistente, especificación funcional, criterios de aceptación e implementación de un MVP interactivo para la gestión de reservas y créditos.
 
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/yoga-studio-mvp
-cd yoga-studio-mvp
-
-# 2. Instalar dependencias
-npm install
-
-# 3. Configurar variables de entorno
-cp .env.example .env.local
-# Completar con las credenciales de tu proyecto Supabase
-
-# 4. Ejecutar migraciones
-npx prisma migrate dev
-
-# 5. Cargar datos de prueba (opcional)
-npx prisma db seed
-
-# 6. Iniciar el servidor de desarrollo
-npm run dev
-```
-
-Abrí <http://localhost:3000> en el navegador.
-
----
-
-## Variables de entorno
-
-Copiá `.env.example` a `.env.local` y completá los valores:
-
-```env
-DATABASE_URL=
-DIRECT_URL=
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-```
-
-Todos los valores se obtienen del dashboard de tu proyecto en Supabase.
-
----
-
-## Usuarios de prueba
-
-Después de correr el seed, podés ingresar con:
-
-| Rol | Email | Contraseña |
-| --- | --- | --- |
-| Administradora | andrea@estudio.com | demo1234 |
-| Instructora | laura@estudio.com | demo1234 |
-| Alumna | maria@estudio.com | demo1234 |
-
----
-
-## Decisiones de diseño
-
-**Una única fuente de verdad.** El saldo de clases se deriva siempre del historial de transacciones, nunca de un campo editable directamente. Elimina los desacuerdos.
-
-**Reservas atómicas.** Las reservas usan `SELECT FOR UPDATE` en PostgreSQL para evitar sobrecupos cuando dos alumnas intentan tomar el último lugar al mismo tiempo.
-
-**WhatsApp sin API.** La comunicación de cancelaciones genera un enlace `wa.me` con el mensaje prellenado. Funciona sin costo ni integración externa.
-
-**Row Level Security.** Cada alumna solo puede leer sus propios datos a nivel de base de datos, no solo a nivel de código.
-
----
-
-## Autor
+## Autora
 
 [Maru](https://github.com/marucepeda)
