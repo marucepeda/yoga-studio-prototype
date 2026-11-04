@@ -1,8 +1,8 @@
-# Estudio de Yoga — [MVP](https://marucepeda.github.io/yoga-studio-prototype/)
+# Estudio de Yoga I — [MVP](https://marucepeda.github.io/yoga-studio-prototype/)
 
 Gestión digital de clases, paquetes y reservas para un estudio de yoga.
 
-Proyecto de Fundamentos de Product Engineering con IA · Código Facilito
+Proyecto I de Fundamentos de Product Engineering con IA · Código Facilito
 
 ---
 
